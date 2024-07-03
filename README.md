@@ -4,7 +4,7 @@
 
 Welcome to my capstone project for the Google Data Analytics Certificate course.
 
-Bellabeat, a high-tech manufacturer of health-focused products for women, is a successful small company with the potential to become a larger player in the global smart device market. Urška Sršen, cofounder and Chief Creative Officer of Bellabeat, believes that analyzing smart device fitness data could unlock new growth opportunities for the company.
+Bellabeat, a high-tech manufacturer of health-focused products for women, is a successful small company with the potential to become a larger player in the global smart device market. Urška Sršen, co-founder and Chief Creative Officer of Bellabeat believes that analyzing smart device fitness data could unlock new growth opportunities for the company.
 
 As a junior data analyst, my task is to focus on one of Bellabeat’s products and analyze smart device data to gain insights into how consumers are using their smart devices. These insights will then help guide the company’s marketing strategy. I will present my analysis to the Bellabeat executive team, along with high-level recommendations for their marketing strategy.
 
@@ -15,25 +15,25 @@ Sršen asks you to analyze smart device usage data to gain insight into how cons
 These questions will guide your analysis:
 1. What are some trends in smart device usage?
 2. How could these trends apply to Bellabeat customers?
-3. How could these trends help influence Bellabeat marketing strategy?
+3. How could these trends help influence Bellabeat's marketing strategy?
 
 Stakeholders:
-- Urška Sršen - Bellabeat cofounder and Chief Creative Officer
-- Sando Mur - Bellabeat cofounder and key member of Bellabeat executive team
+- Urška Sršen - Bellabeat co-founder and Chief Creative Officer
+- Sando Mur - Bellabeat cofounder and a key member of the Bellabeat executive team
 - Bellabeat Marketing Analytics team
 
 ## Prepare
 
-The dataset used for this case study is [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) The dataset is stored in Kaggle and made available through [Mobius](https://www.kaggle.com/arashnic) This Kaggle data set contains personal fitness tracker from thirty fitbit users. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
+The dataset used for this case study is [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) The dataset is stored in Kaggle and made available through [Mobius](https://www.kaggle.com/arashnic) This Kaggle data set contains personal fitness tracker from thirty Fitbit users. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
 
 - The Fitbit Fitness Tracker data was collected in 2016, making it outdated for current trend analysis.
-- The data was collected over only a 31-day period (April 12, 2016, to May 12, 2016).
-- The data source includes information from only 33 Fitbit tracker users, which is a small sample size and less representative for our analysis.
+- The data was collected over only 31 days (April 12, 2016, to May 12, 2016).
+- The data source includes information from only 33 Fitbit tracker users, which is a small sample size and less representative of our analysis.
 - Bellabeat products are targeted at women, but the dataset does not provide information about gender or other demographic details.
 
-I have used BigQuery offered by Google Cloud to process and analyze the data. For visualizations, I have used Tableau Public. To address this business task, only 2 out of the 18 provided datasets were used. Data was provided in csv format.
+I have used BigQuery offered by Google Cloud to process and analyze the data. For visualizations, I have used Tableau Public. To address this business task, only 2 out of the 18 provided datasets were used. Data was provided in CSV format.
 
-- dailyActivity_merged which contains data on Activity, Distance, Calories, Steps (combined from 3 separate files named dailyIntensities, dailyCalories and dailySteps)
+- dailyActivity_merged which contains data on Activity, Distance, Calories, and Steps (combined from 3 separate files named dailyIntensities, dailyCalories and dailySteps)
 - sleepDay_merged which contains data on sleep
 
 ## Process
@@ -112,11 +112,11 @@ The datasets contain multiple parameters that will assist in identifying pattern
 
 **1. Percentage of users that use smart device**
 
-We calculate the percentage of users who use their smart device on a daily basis for both activities and sleep. Users are classified into three usage categories:
+We calculate the percentage of users who use their smart device daily for both activities and sleep. Users are classified into three usage categories:
 
 - Active: Users who use their device between 25 and 31 days.
 - Moderate: Users who use their device between 15 and 24 days.
-- Light: Users who use their device less than 15 days.
+- Light: Users who use their device for less than 15 days.
 
 ```sql
 --Merge datasets
@@ -155,6 +155,76 @@ SELECT
 FROM usage
 GROUP BY user_type;
 ```
+![Percentage of users using smart device](Visualizations/percentage-of-users-using-smart-device.png)
+
+**2. Activity time of users**
+
+Time spent by users on activities per day. 
+
+```sql
+--Average activity of users
+SELECT Id,
+  AVG(VeryActiveMinutes) AS avg_very_active_mins,
+  AVG(FairlyActiveMinutes) AS avg_fairly_active_mins,
+  AVG(LightlyActiveMinutes) AS avg_lightly_active_mins,
+  AVG(SedentaryMinutes) AS avg_sedentary_mins
+FROM `fast-lattice-419716.bellabeat.dailyActivity`
+GROUP BY Id;
+```
+![Activity Time of Users](Visualizations/Activity-Time-of-Users.png)
+
+**3. The activity level of users based on total steps**
+
+We categorize the activity level of users based on the total number of steps taken per day:
+
+- Sedentary: Less than 5000 steps a day
+- Lightly active: Between 5000 and 7499 steps a day
+- Moderately active active: Between 7500 and 9999 steps a day
+- Fairly active: Between 10000 and 12499
+- Highly active: >12500
+
+```sql
+--Average steps of users
+SELECT
+  Id,
+  AVG(TotalSteps) AS avg_total_steps,
+  CASE
+    WHEN AVG(TotalSteps) < 5000 THEN 'Sedentary'
+    WHEN AVG(TotalSteps) BETWEEN 5000 AND 7499 THEN 'Lightly Active'
+    WHEN AVG(TotalSteps) BETWEEN 7500 AND 9999 THEN 'Moderately Active'
+    WHEN AVG(TotalSteps) BETWEEN 10000 AND 12499 THEN 'Fairly Active'
+    WHEN AVG(TotalSteps) > 12500 THEN 'Highly Active'
+  END AS activity_level
+FROM `fast-lattice-419716.bellabeat.dailyActivity`
+GROUP BY Id;
+```
+![steps of users](Visualizations/Steps-of-Users.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
