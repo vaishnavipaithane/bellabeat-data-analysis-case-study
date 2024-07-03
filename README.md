@@ -49,12 +49,12 @@ SELECT
   COUNT(DISTINCT Id) AS Number_of_users,
   MIN(ActivityDate) AS start_date,
   MAX(ActivityDate) AS end_date
-FROM `fast-lattice-419716.bellabeat.dailyActivity`;
+FROM `bellabeat.dailyActivity`;
 
 --check for duplicates in dailyActivity
 SELECT Id, ActivityDate, TotalSteps, 
 COUNT(*)
-FROM `fast-lattice-419716.bellabeat.dailyActivity`
+FROM `bellabeat.dailyActivity`
 GROUP BY id, ActivityDate, TotalSteps
 HAVING COUNT(*) > 1;
 
@@ -62,14 +62,14 @@ HAVING COUNT(*) > 1;
 SELECT
   Id,
   COUNT(*) as number_of_steps_less_than_2000
-FROM `fast-lattice-419716.bellabeat.dailyActivity`
+FROM `bellabeat.dailyActivity`
 WHERE 
 TotalSteps <= 2000
 GROUP BY Id
 ORDER BY number_of_steps_less_than_2000 DESC;
 
 -- Delete all rows that contain less than 2000 total steps
-DELETE FROM `fast-lattice-419716.bellabeat.dailyActivity`
+DELETE FROM `bellabeat.dailyActivity`
 WHERE TotalSteps <= 2000;
 ```
 
@@ -82,22 +82,22 @@ SELECT
   COUNT(DISTINCT Id) AS Number_of_users,
   MIN(SleepDay) AS start_date,
   MAX(SleepDay) AS end_date
-FROM `fast-lattice-419716.bellabeat.sleepDay`;
+FROM `bellabeat.sleepDay`;
 
 --check for duplicates in sleepDay
 SELECT Id, SleepDay, 
 COUNT(*) AS number_of_id
-FROM `fast-lattice-419716.bellabeat.sleepDay`
+FROM `bellabeat.sleepDay`
 GROUP BY id, SleepDay
 HAVING Count(*) > 1; --there are 3 duplicate rows in the dataset
 
 --remove duplicates in sleepDay
 CREATE OR REPLACE TABLE `fast-lattice-419716.bellabeat.sleepDay` AS
 SELECT DISTINCT Id, SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed
-FROM `fast-lattice-419716.bellabeat.sleepDay`;
+FROM `bellabeat.sleepDay`;
 
 --Verify the number of rows
-SELECT COUNT(*) AS row_count FROM `fast-lattice-419716.bellabeat.sleepDay`; --duplicates removed (410 rows)
+SELECT COUNT(*) AS row_count FROM `bellabeat.sleepDay`; --duplicates removed (410 rows)
 ```
 
 - The 'Id' column represents the number of unique users. The dailyActivity table contains 33 distinct IDs, whereas the sleepDay table has only 24 distinct IDs, which is not a sufficient sample size.
@@ -124,8 +124,8 @@ WITH merged_data AS (
   SELECT
     a.Id,
     a.ActivityDate AS date
-  FROM `fast-lattice-419716.bellabeat.dailyActivity` a
-  INNER JOIN `fast-lattice-419716.bellabeat.sleepDay` s
+  FROM `bellabeat.dailyActivity` a
+  INNER JOIN `bellabeat.sleepDay` s
   ON a.Id = s.Id AND a.ActivityDate = s.SleepDay
 ),
 --number of days per user
@@ -168,7 +168,7 @@ SELECT Id,
   AVG(FairlyActiveMinutes) AS avg_fairly_active_mins,
   AVG(LightlyActiveMinutes) AS avg_lightly_active_mins,
   AVG(SedentaryMinutes) AS avg_sedentary_mins
-FROM `fast-lattice-419716.bellabeat.dailyActivity`
+FROM `bellabeat.dailyActivity`
 GROUP BY Id;
 ```
 ![Activity Time of Users](Visualizations/Activity-Time-of-Users.png)
@@ -180,8 +180,8 @@ We categorize the activity level of users based on the total number of steps tak
 - Sedentary: Less than 5000 steps a day
 - Lightly active: Between 5000 and 7499 steps a day
 - Moderately active active: Between 7500 and 9999 steps a day
-- Fairly active: Between 10000 and 12499
-- Highly active: >12500
+- Fairly active: Between 10000 and 12499 steps a day
+- Highly active: >12500 steps a day
 
 ```sql
 --Average steps of users
@@ -195,7 +195,7 @@ SELECT
     WHEN AVG(TotalSteps) BETWEEN 10000 AND 12499 THEN 'Fairly Active'
     WHEN AVG(TotalSteps) > 12500 THEN 'Highly Active'
   END AS activity_level
-FROM `fast-lattice-419716.bellabeat.dailyActivity`
+FROM `bellabeat.dailyActivity`
 GROUP BY Id;
 ```
 ![steps of users](Visualizations/Steps-of-Users.png)
