@@ -254,10 +254,26 @@ JOIN avg_calories c ON a.Id = c.Id;
 | ![Sedentary mins vs calories burned](Visualizations/Sedentary-Mins-vs-calories-burned.png) | ![lightly active mins vs calories burned](Visualizations/Lightly-active-mins-vs-calories-burned.png) | ![fairly active mins vs calories burned](Visualizations/Fairly-active-mins-vs-calories-burned.png) | ![very active mins vs calories burned](Visualizations/Very-active-mins-vs-calories-burned.png) |
 | :-----------------------------------------: | :-----------------------------------------: |  :-----------------------------------------: | :-----------------------------------------: |
 
-The R-squared value for sedentary minutes is 0.0010352
-The R-squared value for lightly active minutes is 0.0252009
-The R-squared value for fairly active minutes is 0.0148527
-The R-squared value for very active minutes is 0.297635
+- The R-squared value for sedentary minutes is 0.0010352
+- The R-squared value for lightly active minutes is 0.0252009
+- The R-squared value for fairly active minutes is 0.0148527
+- The R-squared value for very active minutes is 0.297635
+
+There is a moderate to strong positive correlation between very active minutes and calories burned indicated by the the R-squared value. Individuals who spend more minutes being very active tend to burn more calories on average. 
+
+**5. Relation between average steps of users and calories burned**
+
+| ![steps vs calories](Visualizations/steps-vs-calories.png) | ![calories vs steps by activity level](Visualizations/Calories-vs-Steps-by-Activity-level.png) |
+| :-----------------------------------------: | :-----------------------------------------: |
+
+The R-squared value is 0.119697. There is a moderate correlation between average steps taken by users and calories burned. Steps taken contribute to calories burned, but they are not the only factor. Other variables also play a significant role in determining the calories burned.
+
+**6. Relation between sleeping hours and calories burned**
+
+![asleep hours vs calories burned](Visualizations/Asleep-hours-vs-Calories-burned.png)
+
+The R-squared value is 0.0001998. There is almost no linear relationship between average sleep hours and calories burned. This result may stem from insufficient data collected to track the user's sleep patterns, suggesting a potential area for improvement in future data collection.
+
 
 
 
