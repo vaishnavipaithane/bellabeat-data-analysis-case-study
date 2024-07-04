@@ -263,8 +263,8 @@ There is a moderate to strong positive correlation between very active minutes a
 
 **5. Relation between average steps of users and calories burned**
 
-| ![steps vs calories](Visualizations/steps-vs-calories.png) | ![calories vs steps by activity level](Visualizations/Calories-vs-Steps-by-Activity-level.png) |
-| :-----------------------------------------: | :-----------------------------------------: |
+| ![steps vs calories](Visualizations/steps-vs-calories.png) | ![calories vs steps by activity level](Visualizations/Calories-vs-Steps-by-Activity-level.png) | ![calories vs activity](Visualizations/Calories-vs-activity.png)
+| :-----------------------------------------: | :-----------------------------------------: | :-----------------------------------------: |
 
 The R-squared value is 0.119697. There is a moderate correlation between average steps taken by users and calories burned. Steps taken contribute to calories burned, but they are not the only factor. Other variables also play a significant role in determining the calories burned.
 
