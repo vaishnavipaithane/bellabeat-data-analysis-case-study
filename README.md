@@ -252,7 +252,7 @@ JOIN avg_steps s ON a.Id = s.Id
 JOIN avg_calories c ON a.Id = c.Id;
 ```
 | ![Sedentary mins vs calories burned](Visualizations/Sedentary-Mins-vs-calories-burned.png) | ![lightly active mins vs calories burned](Visualizations/Lightly-active-mins-vs-calories-burned.png) |
-
+| :-----------------------------------------: | :-----------------------------------------: |
 Visualizations/Fairly-active-mins-vs-calories-burned.png
 
 Visualizations/Very-active-mins-vs-calories-burned.png
