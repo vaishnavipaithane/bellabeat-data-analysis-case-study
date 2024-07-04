@@ -234,7 +234,7 @@ avg_calories AS(
   SELECT
     Id,
     AVG(Calories) AS avg_calories_burned
-  FROM fast-lattice-419716.bellabeat.dailyActivity
+  FROM bellabeat.dailyActivity
   GROUP BY Id
 )
 -- Join the four CTEs based on Id
@@ -254,7 +254,10 @@ JOIN avg_calories c ON a.Id = c.Id;
 | ![Sedentary mins vs calories burned](Visualizations/Sedentary-Mins-vs-calories-burned.png) | ![lightly active mins vs calories burned](Visualizations/Lightly-active-mins-vs-calories-burned.png) | ![fairly active mins vs calories burned](Visualizations/Fairly-active-mins-vs-calories-burned.png) | ![very active mins vs calories burned](Visualizations/Very-active-mins-vs-calories-burned.png) |
 | :-----------------------------------------: | :-----------------------------------------: |  :-----------------------------------------: | :-----------------------------------------: |
 
-
+The R-squared value for sedentary minutes is 0.0010352
+The R-squared value for lightly active minutes is 0.0252009
+The R-squared value for fairly active minutes is 0.0148527
+The R-squared value for very active minutes is 0.297635
 
 
 
