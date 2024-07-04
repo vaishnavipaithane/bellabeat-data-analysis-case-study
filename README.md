@@ -274,6 +274,10 @@ The R-squared value is 0.119697. There is a moderate correlation between average
 
 The R-squared value is 0.0001998. There is almost no linear relationship between average sleep hours and calories burned. This result may stem from insufficient data collected to track the user's sleep patterns, suggesting a potential area for improvement in future data collection.
 
+## Conclusion and Recommendation
+
+
+
 
 
 
