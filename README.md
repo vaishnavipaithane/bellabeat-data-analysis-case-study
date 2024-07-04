@@ -6,7 +6,7 @@ Welcome to my capstone project for the Google Data Analytics Certificate course.
 
 Bellabeat, a high-tech manufacturer of health-focused products for women, is a successful small company with the potential to become a larger player in the global smart device market. Urška Sršen, co-founder and Chief Creative Officer of Bellabeat believes that analyzing smart device fitness data could unlock new growth opportunities for the company.
 
-As a junior data analyst, my task is to focus on one of Bellabeat’s products and analyze smart device data to gain insights into how consumers are using their smart devices. These insights will then help guide the company’s marketing strategy. I will present my analysis to the Bellabeat executive team, along with high-level recommendations for their marketing strategy.
+As a junior data analyst, I focus on one of Bellabeat’s products and analyze smart device data to gain insights into how consumers use their smart devices. These insights will then help guide the company’s marketing strategy. I will present my analysis to the Bellabeat executive team and make high-level recommendations for their marketing strategy.
 
 ## Ask
 
@@ -200,9 +200,62 @@ GROUP BY Id;
 ```
 ![steps of users](Visualizations/Steps-of-Users.png)
 
+**4. Relation between activity time of users and calories burned**
 
+```sql
+WITH avg_activity AS (
+  -- Average daily activity of users
+  SELECT 
+    Id,
+    AVG(VeryActiveMinutes) AS avg_very_active_mins,
+    AVG(FairlyActiveMinutes) AS avg_fairly_active_mins,
+    AVG(LightlyActiveMinutes) AS avg_lightly_active_mins,
+    AVG(SedentaryMinutes) AS avg_sedentary_mins
+  FROM `bellabeat.dailyActivity`
+  GROUP BY Id
+),
+avg_steps AS (
+  -- Average daily steps of users
+  SELECT
+    Id,
+    AVG(TotalSteps) AS avg_total_steps,
+    CASE
+      WHEN AVG(TotalSteps) < 5000 THEN 'Sedentary'
+      WHEN AVG(TotalSteps) BETWEEN 5000 AND 7499 THEN 'Lightly Active'
+      WHEN AVG(TotalSteps) BETWEEN 7500 AND 9999 THEN 'Moderately Active'
+      WHEN AVG(TotalSteps) BETWEEN 10000 AND 12499 THEN 'Fairly Active'
+      WHEN AVG(TotalSteps) > 12500 THEN 'Highly Active'
+    END AS activity_level
+  FROM `bellabeat.dailyActivity`
+  GROUP BY Id
+),
+avg_calories AS(
+  --Average caloried burned by users
+  SELECT
+    Id,
+    AVG(Calories) AS avg_calories_burned
+  FROM fast-lattice-419716.bellabeat.dailyActivity
+  GROUP BY Id
+)
+-- Join the four CTEs based on Id
+SELECT 
+  a.Id,
+  a.avg_very_active_mins,
+  a.avg_fairly_active_mins,
+  a.avg_lightly_active_mins,
+  a.avg_sedentary_mins,
+  s.avg_total_steps,
+  s.activity_level,
+  c.avg_calories_burned
+FROM avg_activity a
+JOIN avg_steps s ON a.Id = s.Id
+JOIN avg_calories c ON a.Id = c.Id;
+```
+| ![Sedentary mins vs calories burned](Visualizations/Sedentary-Mins-vs-calories-burned.png) | ![lightly active mins vs calories burned](Visualizations/Lightly-active-mins-vs-calories-burned.png) |
 
+Visualizations/Fairly-active-mins-vs-calories-burned.png
 
+Visualizations/Very-active-mins-vs-calories-burned.png
 
 
 
