@@ -10,7 +10,7 @@ As a junior data analyst, I focus on one of Bellabeat’s products and analyze s
 
 ## Ask
 
-Sršen asks you to analyze smart device usage data to gain insight into how consumers use non-Bellabeat smart devices. She then wants you to select one Bellabeat product to apply these insights to in your presentation. 
+Sršen asks you to analyze smart device usage data to understand how consumers use non-Bellabeat smart devices. She then wants you to select one Bellabeat product to apply these insights to in your presentation. 
 
 These questions will guide your analysis:
 1. What are some trends in smart device usage?
@@ -24,14 +24,14 @@ Stakeholders:
 
 ## Prepare
 
-The dataset used for this case study is [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) The dataset is stored in Kaggle and made available through [Mobius](https://www.kaggle.com/arashnic) This Kaggle data set contains personal fitness tracker from thirty Fitbit users. Thirty eligible Fitbit users consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
+The dataset used for this case study is [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit). The dataset is stored in Kaggle and made available through [Mobius](https://www.kaggle.com/arashnic). This Kaggle data set contains a personal fitness tracker from thirty Fitbit users. Thirty eligible Fitbit users consented to submit personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users’ habits.
 
 - The Fitbit Fitness Tracker data was collected in 2016, making it outdated for current trend analysis.
 - The data was collected over only 31 days (April 12, 2016, to May 12, 2016).
 - The data source includes information from only 33 Fitbit tracker users, which is a small sample size and less representative of our analysis.
 - Bellabeat products are targeted at women, but the dataset does not provide information about gender or other demographic details.
 
-I have used BigQuery offered by Google Cloud to process and analyze the data. For visualizations, I have used Tableau Public. To address this business task, only 2 out of the 18 provided datasets were used. Data was provided in CSV format.
+I have used BigQuery offered by Google Cloud to process and analyze the data. For visualizations, I have used Tableau Public. Only 2 out of the 18 provided datasets were used to address this business task. Data was provided in CSV format.
 
 - dailyActivity_merged which contains data on Activity, Distance, Calories, and Steps (combined from 3 separate files named dailyIntensities, dailyCalories and dailySteps)
 - sleepDay_merged which contains data on sleep
@@ -276,7 +276,44 @@ The R-squared value is 0.0001998. There is almost no linear relationship between
 
 ## Conclusion and Recommendation
 
+In our analysis of Bellabeat's fitness data, several key points emerged that can guide future strategies and product improvements. Here are the primary findings and recommendations:
 
+1. Need for More Demographic Data:
+
+Currently, the dataset lacks demographic information such as age and sex, which are crucial for a more comprehensive analysis. Understanding how these factors influence fitness outcomes can lead to more personalized and effective product recommendations.
+
+2. High Inactivity Among Users:
+
+A significant portion of users exhibit sedentary lifestyles. Addressing this can lead to better health outcomes and increased product usage.
+
+3. Product Features to Encourage Activity:
+
+- Smart Device Notifications: Implementing notifications or reminders to move can help reduce sedentary behaviour.
+- Goal Tracking: Encouraging users to set and track daily step goals and other activities can help them monitor their progress and stay motivated.
+- Challenges and Rewards: Introducing a system of challenges, medals, or badges can foster a sense of achievement and encourage more active participation.
+- Sleep Data Tracking: Providing detailed sleep data that can help users improve their sleep quality, contributing to overall well-being.
+
+4. Target Marketing Strategies:
+
+- Customer Segments: Marketing efforts should focus on those with sedentary and lightly active lifestyles, as these segments have the most potential for improvement.
+- Lifestyle Impact: Weekly emails that discuss the benefits of an active lifestyle on both mental and physical health can provide valuable information and motivation.
+
+5. User Engagement Tactics:
+
+- Motivational Prompts: Offering personalized motivational prompts and activity-specific suggestions based on user preferences can help keep users engaged.
+- Community Features: Enhancing the mobile application with features like group discussions, meet-ups, and activity clubs can foster a sense of community and support among users.
+
+6. Device Usage Insights:
+
+Only 38% of users wear their devices all the time. This highlights the need for marketing the device's practical benefits, such as water resistance, long-lasting batteries, quick recharge times, and high sensitivity for detecting heart rate and GPS.
+
+7. Marketing Messaging:
+
+- Emphasizing the durability and convenience of the device can attract more consistent usage.
+- Highlighting the advanced features like heart rate monitoring and GPS accuracy can appeal to users looking for reliable fitness tracking.
+- By focusing on these areas, Bellabeat can improve user engagement, drive healthier habits, and stand out in the competitive health and wellness market. Engaging effectively with users and leveraging the full capabilities of the mobile application will be crucial for Bellabeat's success.
+
+## Thank you
 
 
 
